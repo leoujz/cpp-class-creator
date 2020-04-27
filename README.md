@@ -4,7 +4,7 @@ forked from [https://github.com/tzAcee/cpp-class-creator](https://github.com/tzA
 
 add some features:
 * always make root path as default location
-* creat .h instead of .hpp
+* create .h instead of .hpp
 * add header guard to .h
 * format might be a little tidier
 
