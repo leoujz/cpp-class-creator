@@ -1,8 +1,14 @@
 # cpp-class-creator README
 
-Hey I'm Maxim. I wanted created a little c++ extension to create classes.
+forked from [https://github.com/tzAcee/cpp-class-creator](https://github.com/tzAcee/cpp-class-creator), thanks for the author.
 
-I can work on it when I have time in order to improve it. Just open some Issues or Pull Request. Im happy to work on them!
+add some features:
+* always make root path as default location
+* creat .h instead of .hpp
+* add header guard to .h
+* format might be a little tidier
+
+ps: some features for own fast use, might broke the original function, so it is not ready to create a pull request and not ready to publish to VS Code market.
 
 ## Features
 

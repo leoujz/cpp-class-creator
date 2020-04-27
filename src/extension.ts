@@ -17,17 +17,21 @@ function create_input()
 function create_hpp(name: string, dir: string)
 {
 	var hpp_buffer =
-`class ` + name +`  
+`#ifndef ` + name.toUpperCase() + `_H
+#define ` + name.toUpperCase() + `_H
+
+class ` + name +`  
 {
-	private:
+private:
+    /* data */
+public:
+	`+ name +`();
+	~`+name+`();
+};
 
-	public:
-
-		`+ name +`();
-		~`+name+`();
-
-};`;
-	var hpp_name = dir+"/"+name + '.hpp';
+#endif /* ` + name.toUpperCase() + `_H */
+`;
+	var hpp_name = dir+"/"+name + '.h';
 	fs.writeFile(hpp_name, hpp_buffer, function (err)
 	{
 		if (err) {
@@ -43,17 +47,16 @@ function create_hpp(name: string, dir: string)
 function create_cpp(name: string, dir: string)
 {
 	var cpp_buffer =
-`#include "` + name +`.hpp"  
+`#include "` + name +`.h"  
 
 `+name+`::`+ name +`()
 {
-
 }
 
 `+name+`::~`+ name + `()
 {
-
-}`;
+}
+`;
 	var cpp_name = dir+"/"+name + '.cpp';
 	fs.writeFile(cpp_name, cpp_buffer, function (err)
 	{
@@ -95,14 +98,14 @@ function add_to_task(name: string, dir: string)
 
 function create_class(name: string, dir: string)
 {
-	if (fs.existsSync(dir)) {
-		var stats = fs.lstatSync(dir);
-
-		if (stats.isDirectory()) {
-			return false;
-		}
-	}
-	fs.mkdirSync(dir);
+//	if (fs.existsSync(dir)) {
+//		var stats = fs.lstatSync(dir);
+//
+//		if (stats.isDirectory()) {
+//			return false;
+//		}
+//	}
+//	fs.mkdirSync(dir);
 
 	var hpp = create_hpp(name, dir);
 	var cpp = create_cpp(name, dir);
@@ -128,9 +131,9 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.window.showErrorMessage("Your Class could not be created!");
 				return;
 			}
-			else if (res.length > 12)
+			else if (res.length > 64)
 			{
-				vscode.window.showErrorMessage("Class name to long!");
+				vscode.window.showErrorMessage("Class name too long!");
 				return;
 			}
 			else if (res.indexOf(' ') >= 0)
@@ -140,8 +143,9 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 			let dir :string | undefined= vscode.workspace.getConfiguration().get("cpp.creator.setPath");
 			if (dir == null) {
-				dir = vscode.workspace.rootPath + "/" + res;
+				dir = vscode.workspace.rootPath+"";
 			}
+			dir = vscode.workspace.rootPath+"";
 			var out = create_class(res, dir);
 			if (out)
 			{

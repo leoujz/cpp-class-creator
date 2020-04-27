@@ -2,7 +2,7 @@
 	"name": "cpp-class-creator",
 	"displayName": "C++ Class Creator",
 	"description": "A very simple class creation extension for Visual Studio Code from FleeXo",
-	"publisher": "FleeXo",
+	"publisher": "dcs",
 	"icon": "icon/logo.png",
 	"repository": {
 		"url": "https://github.com/tzAcee/cpp-class-creator.git"
@@ -56,7 +56,10 @@
 				"title": "C++ Class Creator",
 				"properties": {
 					"cpp.creator.setPath": {
-						"type": ["string", "null"],
+						"type": [
+							"string",
+							"null"
+						],
 						"default": null,
 						"description": "Specifies the path, where the class is created. [setting: cpp.creator.setPath = \"path\""
 					}
